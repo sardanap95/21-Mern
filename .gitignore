@@ -1,3 +1,4 @@
 /Frontend/books/node_modules
 /Backend/node_modules
-vscode
+/Backend/package-lock.json
+/Frontend/books/package-lock.json
