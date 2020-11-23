@@ -3,18 +3,25 @@ import { combineReducers } from "redux";
 const initialState = {
   apiKey: "AIzaSyAyItq36H1DdTCaN71bDuujxMTv5v7EJkw",
   books: {
-    searchedBooks: [],
     savedBooks: [],
   },
+  searchedBooks: [],
+  searchText: "",
 };
 
 export default combineReducers({
   books: function (state = initialState, action) {
     switch (action.type) {
-      case "setSearchBooks":
+      case "setSearchText":
         return {
-          ...state.books,
-          searchBooks: action.payload,
+          ...state,
+          searchText: action.payload,
+        };
+      case "setSearchBooks":
+        
+        return {
+          ...state,
+          searchedBooks: action.payload,
         };
       case "setSaveBook":
         return {
@@ -24,5 +31,5 @@ export default combineReducers({
       default:
         return state;
     }
-  }
+  },
 });

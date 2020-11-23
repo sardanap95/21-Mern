@@ -1,0 +1,22 @@
+.book-card {
+  border-radius: 10px;
+  max-width: 18rem;
+  height: 28rem;
+}
+
+.main-container {
+  min-height: 90vh;
+}
+
+.book-img {
+  border-radius: 10px;
+}
+
+.input-height {
+  height: 3rem;
+}
+
+.x {
+  place-content: center;
+  place-items: center;
+}
