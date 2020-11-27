@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 mongoose
-  .connect("mongodb://localhost/books", {
+  .connect(process.env.MONGODB_URI || "mongodb://localhost/books", {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,

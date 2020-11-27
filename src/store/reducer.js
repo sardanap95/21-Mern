@@ -26,6 +26,7 @@ export default combineReducers({
           savedBooks: action.payload,
         };
       case "removeSavedBook":
+        console.log("xx");
         return {
           ...state,
           savedBooks: state.savedBooks.splice(

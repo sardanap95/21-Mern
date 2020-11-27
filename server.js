@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
-const { bookModel } = require("../Backend/db");
+const { bookModel } = require("./db/db");
 
 app.use(bodyParser.json());
 app.use(
@@ -18,7 +18,7 @@ app.use(
   })
 );
 
-const port = "9090";
+const port = process.env.PORT || 8080;
 
 app.get("/api/books", (req, res) => {
   console.log("Getting saved books.");
@@ -66,6 +66,10 @@ app.delete("/api/book", ({ query }, res) => {
       res.status(400).send({ status: "Couldn't delete book." });
     });
 });
+
+if (process.env.NODE_ENV === "production") {
+  app;
+}
 
 app.listen(port, () => {
   console.log("Books server running on port " + port);
