@@ -1,23 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const cors = require("cors");
 const app = express();
 const { bookModel } = require("./db/db");
 
 app.use(bodyParser.json());
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:3001",
-      "http://localhost:3002",
-      "http://localhost:3003",
-      "http://localhost:3004",
-      "http://localhost:3005",
-    ],
-  })
-);
-
 const port = process.env.PORT || 8080;
 
 app.get("/api/books", (req, res) => {
@@ -68,7 +54,7 @@ app.delete("/api/book", ({ query }, res) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  app;
+  app.use(express.static("/Frontend/build"));
 }
 
 app.listen(port, () => {
