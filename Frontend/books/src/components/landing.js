@@ -15,9 +15,12 @@ export class Landing extends Component {
     this.props.getDefaultBooks("Artificial Intillegence.");
   }
   render() {
-    const { searchedBooks } = this.props;
+    const { searchedBooks, location } = this.props;
     return (
-      <div className="container-fluid bg-dark p-5 main-container">
+      <div className="container-fluid bg-dark main-container">
+        <div className="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div className="toast-body">Book Saved</div>
+        </div>
         <div className="row justify-content-center">
           <h1 className="mb-3 text-light">Search for a books.</h1>
         </div>
@@ -42,17 +45,28 @@ export class Landing extends Component {
           {searchedBooks.length > 0 && (
             <div>
               <div className="col-12">
-                <p class="text-light">{searchedBooks.length} books found.</p>
+                <p className="text-light">{searchedBooks.length} books found.</p>
               </div>
             </div>
           )}
         </div>
-        <div className="row overflow-auto x">
+        <div className="row overflow-auto">
           {searchedBooks &&
-            searchedBooks.map((book) => {
+            searchedBooks.map((book, index) => {
+              const bookInfo = {
+                b_id: book.id,
+                title: book.volumeInfo.title,
+                authors: book.volumeInfo.authors,
+                image:
+                  book.volumeInfo.imageLinks === undefined
+                    ? ""
+                    : book.volumeInfo.imageLinks.thumbnail,
+                link: book.volumeInfo.infoLink,
+                description: book.volumeInfo.description,
+              };
               return (
-                <div className="col-4">
-                  <BookCard book={book} key={book.id} />
+                <div className="col-3 d-flex justify-content-center align-items-center" key={index}>
+                  <BookCard book={bookInfo} location={location} key={book.id} />
                 </div>
               );
             })}

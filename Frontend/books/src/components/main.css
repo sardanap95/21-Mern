@@ -1,7 +1,7 @@
 .book-card {
   border-radius: 10px;
-  max-width: 18rem;
-  height: 28rem;
+  width: 16rem;
+  height: 25rem;
 }
 
 .main-container {
@@ -14,9 +14,4 @@
 
 .input-height {
   height: 3rem;
-}
-
-.x {
-  place-content: center;
-  place-items: center;
 }

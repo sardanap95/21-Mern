@@ -2,9 +2,7 @@
 import { combineReducers } from "redux";
 const initialState = {
   apiKey: "AIzaSyAyItq36H1DdTCaN71bDuujxMTv5v7EJkw",
-  books: {
-    savedBooks: [],
-  },
+  savedBooks: [],
   searchedBooks: [],
   searchText: "",
 };
@@ -18,15 +16,22 @@ export default combineReducers({
           searchText: action.payload,
         };
       case "setSearchBooks":
-        
         return {
           ...state,
           searchedBooks: action.payload,
         };
-      case "setSaveBook":
+      case "setSavedBook":
         return {
-          ...state.books,
+          ...state,
           savedBooks: action.payload,
+        };
+      case "removeSavedBook":
+        return {
+          ...state,
+          savedBooks: state.savedBooks.splice(
+            state.savedBooks.findIndex((i) => i.b_id === action.payload),
+            1
+          ),
         };
       default:
         return state;

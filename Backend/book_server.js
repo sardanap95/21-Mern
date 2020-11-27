@@ -5,7 +5,18 @@ const app = express();
 const { bookModel } = require("../Backend/db");
 
 app.use(bodyParser.json());
-app.use(cors({ origin: ["http://localhost:8080", "http://localhost:8081"] }));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "http://localhost:3002",
+      "http://localhost:3003",
+      "http://localhost:3004",
+      "http://localhost:3005",
+    ],
+  })
+);
 
 const port = "9090";
 
@@ -14,7 +25,7 @@ app.get("/api/books", (req, res) => {
   bookModel
     .find()
     .then((books) => {
-      console.log(books);
+      console.log("Found " + books.length + " saved books.");
       res.status(200).send({ books });
     })
     .catch((err) => {
@@ -24,7 +35,6 @@ app.get("/api/books", (req, res) => {
 });
 app.post("/api/books", (req, res) => {
   const savedBook = req.body;
-  console.log("Saving " + savedBook);
   new bookModel(savedBook)
     .save()
     .then((response) => {
@@ -52,7 +62,7 @@ app.delete("/api/book", ({ query }, res) => {
       }
     })
     .catch((err) => {
-      console.log("Couldn't delete book.\n" + err);     
+      console.log("Couldn't delete book.\n" + err);
       res.status(400).send({ status: "Couldn't delete book." });
     });
 });

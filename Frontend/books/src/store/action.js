@@ -14,7 +14,7 @@ export const setSearchText = (searchTerm) => {
 export const getDefaultBooks = (searchTerm) => {
   return (dispatch, getState) => {
     axios
-      .get(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&key=${apiKey}&maxResults=3`)
+      .get(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&key=${apiKey}&maxResults=4`)
       .then((books) => {
         console.log(books.data.items);
         dispatch({
@@ -48,9 +48,10 @@ export const getSavedBook = () => {
     axios
       .get("/api/books")
       .then((books) => {
+        console.log(books.data.books);
         dispatch({
           type: "setSavedBook",
-          payload: books,
+          payload: books.data.books,
         });
       })
       .catch((err) => {
@@ -58,26 +59,34 @@ export const getSavedBook = () => {
       });
   };
 };
-export const saveBook = (bookInfo) => {
-  axios
-    .post("/api/books", bookInfo)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+export const saveBook = (book) => {
+  return (dispatch, getState) => {
+    axios
+      .post("/api/books", book)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 };
 
 export const deleteBook = (b_id) => {
-  axios
-    .delete("/api/delete", {
-      params: { b_id },
-    })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  return (dispatch, getState) => {
+    axios
+      .delete("/api/book", {
+        params: { b_id },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: "removeSavedBook",
+          payload: b_id,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 };

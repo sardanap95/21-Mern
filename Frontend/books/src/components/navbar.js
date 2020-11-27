@@ -12,10 +12,10 @@ function Navbar() {
             </Link>
           </div>
           <ul className="navbar-nav ml-auto text-light d-inline-block">
-            <li className="nav-item d-inline-block mr-4">
+            <Link className="nav-item d-inline-block mr-4" to="/saved-books">
               Saved &nbsp;
               <i className="far fa-bookmark"></i>
-            </li>
+            </Link>
           </ul>
         </div>
       </nav>
