@@ -18,9 +18,6 @@ export class Landing extends Component {
     const { searchedBooks, location } = this.props;
     return (
       <div className="container-fluid bg-dark main-container">
-        <div className="toast" role="alert" aria-live="assertive" aria-atomic="true">
-          <div className="toast-body">Book Saved</div>
-        </div>
         <div className="row justify-content-center">
           <h1 className="mb-3 text-light">Search for a books.</h1>
         </div>
@@ -65,7 +62,10 @@ export class Landing extends Component {
                 description: book.volumeInfo.description,
               };
               return (
-                <div className="col-3 d-flex justify-content-center align-items-center" key={index}>
+                <div
+                  className="col-lg-3 col-12 d-flex justify-content-center align-items-center"
+                  key={index}
+                >
                   <BookCard book={bookInfo} location={location} key={book.id} />
                 </div>
               );
