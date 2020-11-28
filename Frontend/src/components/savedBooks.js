@@ -19,7 +19,7 @@ export class savedBooks extends Component {
           {savedBooks &&
             savedBooks.map((book, index) => {
               return (
-                <div className="col-4" key={index}>
+                <div className="col-lg-3 col-12" key={index}>
                   <BookCard book={book} location={location} key={book.id} />
                 </div>
               );
