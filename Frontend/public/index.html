@@ -7,13 +7,7 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self' data: gap: 'unsafe-eval' ws: ; 
-        style-src 'self' 'unsafe-inline'; 
-        script-src https: * ;
-        media-src *; 
-        font-src *;
-        connect-src *;
-        img-src 'self' data: content:;"
+      content="default-src 'self'; img-src *; media-src *; script-src *; style-src *;"
     />
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -30,7 +24,6 @@
     <title>Google Search Book</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
 </html>
