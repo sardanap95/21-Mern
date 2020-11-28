@@ -1,6 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 import { apiKey } from "../api/apiKey";
+import { toast } from "react-toastify";
 
 export const setSearchText = (searchTerm) => {
   return (dispatch, getState) => {
@@ -64,6 +65,7 @@ export const saveBook = (book) => {
       .post("/api/books", book)
       .then((res) => {
         console.log(res);
+        toast.dark("Book saved.");
       })
       .catch((err) => {
         console.log(err);
@@ -83,6 +85,7 @@ export const deleteBook = (b_id) => {
           type: "removeSavedBook",
           payload: b_id,
         });
+        toast.dark("Book deleted.");
       })
       .catch((err) => {
         console.log(err);
