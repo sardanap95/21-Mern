@@ -1,7 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 import { apiKey } from "../api/apiKey";
-axios.defaults.baseURL = "http://localhost:9090";
 
 export const setSearchText = (searchTerm) => {
   return (dispatch, getState) => {
