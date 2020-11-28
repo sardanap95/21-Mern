@@ -2,13 +2,17 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const { bookModel } = require("./db/db");
-const csp = require("express-csp-header");
+const { expressCspHeader, INLINE, NONE, SELF } = require("express-csp-header");
 
 app.use(
-  csp({
-    policies: {
-      "default-src": [csp.NONE],
-      "img-src": [csp.SELF],
+  expressCspHeader({
+    directives: {
+      "default-src": [SELF],
+      "script-src": [SELF, INLINE, "somehost.com"],
+      "style-src": [SELF, "mystyles.net"],
+      "img-src": ["data:", "images.com"],
+      "worker-src": [NONE],
+      "block-all-mixed-content": true,
     },
   })
 );
