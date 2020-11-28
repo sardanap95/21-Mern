@@ -2,6 +2,16 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const { bookModel } = require("./db/db");
+const csp = require("express-csp-header");
+
+app.use(
+  csp({
+    policies: {
+      "default-src": [csp.NONE],
+      "img-src": [csp.SELF],
+    },
+  })
+);
 
 app.use(bodyParser.json());
 const port = process.env.PORT || 8080;
