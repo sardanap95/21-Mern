@@ -44,7 +44,6 @@ app.post("/api/books", (req, res) => {
       res.status(400).send({ status: "Failed to save the book." });
     });
 });
-
 app.delete("/api/book", ({ query }, res) => {
   const { b_id } = query;
   console.log("Deleting " + b_id);
@@ -70,7 +69,11 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "./Frontend/build/index.htmll"));
+  res.sendFile(path.join(__dirname, "./Frontend/build/index.html"));
+});
+
+app.use(function (req, res) {
+  res.sendFile(path.join(__dirname, "./Frontend/build/index.html"));
 });
 
 app.listen(port, () => {
