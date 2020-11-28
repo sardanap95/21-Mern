@@ -4,13 +4,6 @@ import { saveBook, deleteBook } from "../store/action";
 import "./main.css";
 
 export class bookCard extends Component {
-  saveBook(book) {
-    this.props.saveBook(book);
-  }
-  deleteBook(b_id) {
-    this.props.deleteBook(b_id);
-  }
-
   render() {
     const { book, location } = this.props;
 
@@ -31,15 +24,25 @@ export class bookCard extends Component {
               <i className="fas fa-chevron-right" />
             </a>
             {location.pathname === "/" ? (
-              <div className="btn btn-success" onClick={saveBook(book)}>
+              <button
+                className="btn btn-success"
+                onClick={() => {
+                  this.props.saveBook(book);
+                }}
+              >
                 Save &nbsp;
                 <i className="far fa-bookmark"></i>
-              </div>
+              </button>
             ) : (
-              <div className="btn btn-danger text-center" onClick={deleteBook(book.b_id)}>
+              <button
+                className="btn btn-danger text-center"
+                onClick={() => {
+                  this.props.deleteBook(book.b_id);
+                }}
+              >
                 Delete &nbsp;
                 <i className="far fa-trash-alt"></i>
-              </div>
+              </button>
             )}
           </div>
         </div>

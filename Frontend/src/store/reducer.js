@@ -25,14 +25,10 @@ export default combineReducers({
           ...state,
           savedBooks: action.payload,
         };
-      case "removeSavedBook":
-        console.log("xx");
+      case "removeSavedBook":       
         return {
           ...state,
-          savedBooks: state.savedBooks.splice(
-            state.savedBooks.findIndex((i) => i.b_id === action.payload),
-            1
-          ),
+          savedBooks: state.savedBooks.filter((item) => action.payload !== item.b_id),
         };
       default:
         return state;
