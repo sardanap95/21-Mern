@@ -19,7 +19,7 @@ export class Landing extends Component {
     return (
       <div className="container-fluid bg-dark main-container">
         <div className="row justify-content-center">
-          <h1 className="mb-3 text-light">Search for a books.</h1>
+          <h1 className="mt-5 text-light">Search for a books.</h1>
         </div>
         <div className="row justify-content-center">
           <form id="searchForm" onSubmit={this.onSubmit} className="w-50">
