@@ -13,7 +13,9 @@ app.use(
   })
 );
 
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 const port = process.env.PORT || 8080;
 
 app.get("/api/books", (req, res) => {
@@ -64,8 +66,12 @@ app.delete("/api/book", ({ query }, res) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("/Frontend/build"));
+  app.use(express.static("Frontend/build"));
 }
+
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
 app.listen(port, () => {
   console.log("Books server running on port " + port);
