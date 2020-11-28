@@ -3,20 +3,20 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
 const { bookModel } = require("./db/db");
-const { expressCspHeader, INLINE, NONE, SELF } = require("express-csp-header");
+// const { expressCspHeader, INLINE, NONE, SELF } = require("express-csp-header");
 
-app.use(
-  expressCspHeader({
-    directives: {
-      "default-src": [SELF],
-      "script-src": [SELF, , "*"],
-      "style-src": [SELF, "*"],
-      "img-src": ["data:", "*"],
-      "worker-src": [NONE],
-      "block-all-mixed-content": true,
-    },
-  })
-);
+// app.use(
+//   expressCspHeader({
+//     directives: {
+//       "default-src": [SELF],
+//       "script-src": [SELF, , "*"],
+//       "style-src": [SELF, "*"],
+//       "img-src": ["data:", "*"],
+//       "worker-src": [NONE],
+//       "block-all-mixed-content": true,
+//     },
+//   })
+// );
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
