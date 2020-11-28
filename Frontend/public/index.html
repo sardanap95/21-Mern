@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' data: gap: 'unsafe-eval' ws: ; 
+        style-src 'self' 'unsafe-inline'; 
+        script-src https: * ;
+        media-src *; 
+        font-src *;
+        connect-src *;
+        img-src 'self' data: content:;"
+    />
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
       rel="stylesheet"
