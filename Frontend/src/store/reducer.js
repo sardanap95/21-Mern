@@ -25,7 +25,12 @@ export default combineReducers({
           ...state,
           savedBooks: action.payload,
         };
-      case "removeSavedBook":       
+      case "addSavedBook":
+        return {
+          ...state,
+          savedBooks: state.savedBooks.concat(action.payload),
+        };
+      case "removeSavedBook":
         return {
           ...state,
           savedBooks: state.savedBooks.filter((item) => action.payload !== item.b_id),

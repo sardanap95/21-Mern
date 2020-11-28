@@ -13,7 +13,7 @@ mongoose
   });
 
 const booksScehma = new mongoose.Schema({
-  b_id: { type: String, required: true },
+  b_id: { type: String, required: true, unique: false },
   title: { type: String, required: true },
   authors: { type: Array, required: true },
   image: { type: String, required: true },

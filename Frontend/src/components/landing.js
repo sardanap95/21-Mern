@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setSearchText, getSearchedBook, getDefaultBooks } from "../store/action";
+import { setSearchText, getSearchedBook, getDefaultBooks, getSavedBook } from "../store/action";
 import BookCard from "./bookCard";
 
 export class Landing extends Component {
@@ -12,10 +12,12 @@ export class Landing extends Component {
     this.props.getSearchedBook(this.props.searchText);
   };
   componentDidMount() {
+    this.props.getSavedBook();
     this.props.getDefaultBooks("Artificial Intillegence.");
   }
   render() {
-    const { searchedBooks, location } = this.props;
+    const { searchedBooks, savedBooks } = this.props;
+
     return (
       <div className="container-fluid bg-dark main-container">
         <div className="row justify-content-center">
@@ -61,12 +63,24 @@ export class Landing extends Component {
                 link: book.volumeInfo.infoLink,
                 description: book.volumeInfo.description,
               };
+
               return (
                 <div
                   className="col-lg-3 col-12 d-flex justify-content-center align-items-center"
                   key={index}
                 >
-                  <BookCard book={bookInfo} location={location} key={book.id} />
+                  <BookCard
+                    book={bookInfo}
+                    actionBtn={
+                      savedBooks &&
+                      savedBooks.some((savedBook) => {
+                        return savedBook.b_id === bookInfo.b_id;
+                      })
+                        ? "saved"
+                        : "save"
+                    }
+                    key={book.id}
+                  />
                 </div>
               );
             })}
@@ -79,6 +93,7 @@ export class Landing extends Component {
 const mapStateToProps = (state) => ({
   searchText: state.books.searchText,
   searchedBooks: state.books.searchedBooks,
+  savedBooks: state.books.savedBooks,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -90,6 +105,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getDefaultBooks: (searchText) => {
     dispatch(getDefaultBooks(searchText));
+  },
+  getSavedBook: () => {
+    dispatch(getSavedBook());
   },
 });
 

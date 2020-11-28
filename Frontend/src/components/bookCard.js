@@ -5,7 +5,7 @@ import "./main.css";
 
 export class bookCard extends Component {
   render() {
-    const { book, location } = this.props;
+    const { book, actionBtn } = this.props;
 
     return (
       <div className="card book-card m-4 rounded-lg shadow-lg" key={book.id}>
@@ -23,27 +23,38 @@ export class bookCard extends Component {
               Details &nbsp;
               <i className="fas fa-chevron-right" />
             </a>
-            {location.pathname === "/" ? (
-              <button
-                className="btn btn-success"
-                onClick={() => {
-                  this.props.saveBook(book);
-                }}
-              >
-                Save &nbsp;
-                <i className="far fa-bookmark"></i>
-              </button>
-            ) : (
-              <button
-                className="btn btn-danger text-center"
-                onClick={() => {
-                  this.props.deleteBook(book.b_id);
-                }}
-              >
-                Delete &nbsp;
-                <i className="far fa-trash-alt"></i>
-              </button>
-            )}
+            {
+              {
+                save: (
+                  <button
+                    className="btn btn-success"
+                    onClick={() => {
+                      this.props.saveBook(book);
+                    }}
+                  >
+                    Save &nbsp;
+                    <i className="far fa-bookmark"></i>
+                  </button>
+                ),
+                saved: (
+                  <button className="btn btn-secondary disabled">
+                    Saved &nbsp;
+                    <i className="far fa-bookmark"></i>
+                  </button>
+                ),
+                delete: (
+                  <button
+                    className="btn btn-danger text-center"
+                    onClick={() => {
+                      this.props.deleteBook(book.b_id);
+                    }}
+                  >
+                    Delete &nbsp;
+                    <i className="far fa-trash-alt"></i>
+                  </button>
+                ),
+              }[actionBtn]
+            }
           </div>
         </div>
       </div>

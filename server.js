@@ -3,6 +3,9 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
 const { bookModel } = require("./db/db");
+// const cors = require("cors");
+
+// app.use(cors({ origin: ["http://localhost:3000", "https://pushpi-google-books.herokuapp.com"] }));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -23,11 +26,11 @@ app.get("/api/books", (req, res) => {
     });
 });
 app.post("/api/books", (req, res) => {
+  console.log("Saving book.");
   const savedBook = req.body;
   new bookModel(savedBook)
     .save()
     .then((response) => {
-      console.log(response);
       res.status(200).send({ status: "Book saved successfully." });
     })
     .catch((err) => {
@@ -37,7 +40,7 @@ app.post("/api/books", (req, res) => {
 });
 app.delete("/api/book", ({ query }, res) => {
   const { b_id } = query;
-  console.log("Deleting " + b_id);
+  console.log("Deleting book");
   bookModel
     .deleteOne({ b_id })
     .then(({ deletedCount }) => {

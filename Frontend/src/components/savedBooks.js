@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getSavedBook } from "../store/action";
 import BookCard from "./bookCard";
 
 export class savedBooks extends Component {
-  componentDidMount() {
-    this.props.getSavedBook();
-  }
   render() {
-    const { savedBooks, location } = this.props;
+    const { savedBooks } = this.props;
 
     return (
       <div className="container-fluid bg-dark p-5 main-container">
@@ -20,7 +16,7 @@ export class savedBooks extends Component {
             savedBooks.map((book, index) => {
               return (
                 <div className="col-lg-3 col-12" key={index}>
-                  <BookCard book={book} location={location} key={book.id} />
+                  <BookCard book={book} actionBtn="delete" key={book.id} />
                 </div>
               );
             })}
@@ -34,10 +30,4 @@ const mapStateToProps = (state) => ({
   savedBooks: state.books.savedBooks,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getSavedBook: () => {
-    dispatch(getSavedBook());
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(savedBooks);
+export default connect(mapStateToProps, null)(savedBooks);

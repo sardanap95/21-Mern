@@ -2,9 +2,10 @@
 import axios from "axios";
 import { apiKey } from "../api/apiKey";
 import { toast } from "react-toastify";
+// axios.defaults.baseURL = "http://localhost:9090";
 
 export const setSearchText = (searchTerm) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch({
       type: "setSearchText",
       payload: searchTerm,
@@ -13,7 +14,7 @@ export const setSearchText = (searchTerm) => {
 };
 
 export const getDefaultBooks = (searchTerm) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     axios
       .get(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&key=${apiKey}&maxResults=4`)
       .then((books) => {
@@ -28,7 +29,7 @@ export const getDefaultBooks = (searchTerm) => {
   };
 };
 export const getSearchedBook = (searchTerm) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     axios
       .get(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&key=${apiKey}`)
       .then((books) => {
@@ -62,6 +63,10 @@ export const saveBook = (book) => {
     axios
       .post("/api/books", book)
       .then((res) => {
+        dispatch({
+          type: "addSavedBook",
+          payload: book,
+        });
         toast.dark(res.data.status);
       })
       .catch((err) => {
